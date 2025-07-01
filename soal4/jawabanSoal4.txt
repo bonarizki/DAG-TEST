@@ -30,4 +30,9 @@ Contoh: Queue dengan Laravel, Celery di Python, dsb.
 Tujuan: Memisahkan beban baca dan tulis. Tulisan ke master DB, bacaan ke replica DB.
 Contoh: Master-slave setup di MySQL/PostgreSQL.
 
-
+9. Refactor Kode untuk Hindari N+1 Problem
+Tujuan: Mencegah query berulang saat akses relasi data.
+Contoh:
+Laravel: Gunakan with() atau load() → Post::with('comments')->get();
+SQL Manual: Gunakan join daripada query berulang dalam loop.
+Ciri: Jika ada query berulang di loop, besar kemungkinan ada N+1.
