@@ -1,0 +1,33 @@
+1. Gunakan Index (Indeks) pada tabel yang sering diakses
+Tujuan: Mempercepat pencarian dan filter data.
+Contoh: CREATE INDEX idx_email ON users(email);
+
+2. Optimalkan Query SQL
+Tujuan: Hindari query tidak efisien seperti SELECT * atau subquery kompleks.
+Contoh: Ambil hanya kolom yang diperlukan: SELECT name, email FROM users;
+
+3. Gunakan Pagination dan Limit
+Tujuan: Menghindari load data besar sekaligus.
+Contoh: SELECT * FROM users LIMIT 50 OFFSET 100;
+
+4. Denormalisasi Data
+Tujuan: Mengurangi join yang berlebihan.
+Catatan: Gunakan hanya jika join menghambat performa dan data jarang berubah.
+
+5. Gunakan Caching (Redis, Memcached, dll.)
+Tujuan: Menyimpan hasil query yang sering diakses agar tidak perlu akses DB terus-menerus.
+Contoh: Caching hasil dari query dashboard,menu yang sama setiap menit.
+
+6. Materialized View
+Tujuan: Menyimpan hasil query kompleks agar tidak dihitung ulang setiap kali.
+Catatan: Cocok untuk laporan atau agregasi besar.
+
+7. Gunakan Asynchronous Processing / Queue
+Tujuan: Memproses beban berat (misalnya laporan) di background agar tidak menghambat user.
+Contoh: Queue dengan Laravel, Celery di Python, dsb.
+
+8. Gunakan Database slave / replica dari master
+Tujuan: Memisahkan beban baca dan tulis. Tulisan ke master DB, bacaan ke replica DB.
+Contoh: Master-slave setup di MySQL/PostgreSQL.
+
+

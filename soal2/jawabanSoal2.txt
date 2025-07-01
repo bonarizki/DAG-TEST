@@ -1,0 +1,13 @@
+1. membuat table orders
+CREATE TABLE orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_name VARCHAR(100),
+    menu_item VARCHAR(100),
+    order_date DATETIME
+);
+
+2. Menampilkan semua pesanan yang dibuat pada tanggal tertentu.
+SELECT * FROM orders
+WHERE DATE(order_date) = '2025-04-01';
+
+

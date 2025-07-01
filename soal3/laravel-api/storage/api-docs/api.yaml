@@ -1,0 +1,99 @@
+openapi: 3.0.0
+info:
+  title: Virtual Orders API
+  version: 1.0.0
+  description: API tanpa database, hanya pakai Laravel Cache
+
+servers:
+  - url: http://localhost:8000
+
+paths:
+  /api/orders:
+    get:
+      summary: Get latest order by customer name
+      parameters:
+        - name: customer_name
+          in: query
+          description: Filter by customer name
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Latest order found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Order received successfully
+                  order_id:
+                    type: integer
+                    example: 1
+        '404':
+          description: Order not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: No order found
+
+    post:
+      summary: Create a new order
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - customer_name
+                - menu_item
+                - quantity
+              properties:
+                customer_name:
+                  type: string
+                  example: budi
+                menu_item:
+                  type: string
+                  example: nasgor
+                quantity:
+                  type: integer
+                  minimum: 1
+                  example: 1
+      responses:
+        '201':
+          description: Order created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Order received successfully
+                  order_id:
+                    type: integer
+                    example: 1
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: array
+                    items:
+                      type: string
+                    example:
+                      - Nama pelanggan wajib diisi.
+                      - Menu item tidak boleh kosong
+                      - Jumlah pesanan harus diisi.
+                      - Jumlah pesanan harus berupa angka.
+                      - Jumlah pesanan harus lebih dari 0.
