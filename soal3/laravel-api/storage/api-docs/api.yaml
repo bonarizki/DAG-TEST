@@ -20,7 +20,7 @@ paths:
             type: string
       responses:
         '200':
-          description: Latest order found
+          description: Order list retrieved successfully
           content:
             application/json:
               schema:
@@ -28,10 +28,27 @@ paths:
                 properties:
                   message:
                     type: string
-                    example: Order received successfully
-                  order_id:
-                    type: integer
-                    example: 1
+                    example: Order list retrieved successfully
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        customer_name:
+                          type: string
+                          example: budi
+                        menu_item:
+                          type: string
+                          example: nasgor
+                        quantity:
+                          type: integer
+                          example: 1
+                        id:
+                          type: integer
+                          example: 1
+                        created_at:
+                          type: string
+                          example: "2025-07-01 12:57:46"
         '404':
           description: Order not found
           content:
@@ -41,7 +58,13 @@ paths:
                 properties:
                   message:
                     type: string
-                    example: No order found
+                    example: No orders found
+                  data:
+                    type: array
+                    items: {}
+                example:
+                  message: No orders found
+                  data: []
 
     post:
       summary: Create a new order

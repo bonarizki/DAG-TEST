@@ -43,6 +43,14 @@ class OrderController extends Controller
             })->values()->all(); // Reset index array hasil filter
         }
 
+        if ($orders === []) {
+            // Jika tidak ada order yang ditemukan, kembalikan response JSON dengan pesan error
+            return response()->json([
+                'message' => 'No orders found',
+                'data' => []
+            ], 404);
+        }
+        
         // Kembalikan response JSON berisi daftar order
         return response()->json([
             'message' => 'Order list retrieved successfully',
